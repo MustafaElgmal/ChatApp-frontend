@@ -1,6 +1,20 @@
-.Simage{
-    width: 100%;
-    height: 739px;
+.bgg{
+    background-image: url("./assets/kimson-doan-AZMmUy2qL6A-unsplash.jpg");
+    background-position: center;
     background-size: cover;
-    background-position: 50% 50%;
-  }
+    height: 100vh;
+    overflow: hidden;
+}
+.bttn{
+    position: sticky;
+    bottom: 0;
+}
+.box{
+    background: #EEEEEE;
+    margin-left: 15%;
+    margin-right: 15%;
+    height: 90%;
+    width: 70%;
+    overflow: auto;
+
+}

@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
-import loginP from "../Assets/loginP.jpg";
+import loginP from "../assets/loginP.jpg";
 import * as Yup from "yup";
 
 const Login = () => {

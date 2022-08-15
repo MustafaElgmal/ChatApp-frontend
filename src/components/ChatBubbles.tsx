@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Card, Image } from "react-bootstrap";
-import download from "../Assets/download.jpg";
+import download from "../assets/download.jpg";
 
 const ChatBubbles = () => {
   return (

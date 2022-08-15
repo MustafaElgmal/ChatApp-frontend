@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Card, Image } from "react-bootstrap";
-import chat from "../Assets/Chat.jpg";
+import chat from "../assets/Chat.jpg";
 import ChatBubbles from "../components/ChatBubbles";
 
 const GroupChat = () => {

@@ -1,20 +1,58 @@
-.bgg{
-    background-image: url("./assets/kimson-doan-AZMmUy2qL6A-unsplash.jpg");
-    background-position: center;
-    background-size: cover;
-    height: 100vh;
-    overflow: hidden;
+.bgg {
+  background-image: url("./assets/kimson-doan-AZMmUy2qL6A-unsplash.jpg");
+  background-position: center;
+  background-size: cover;
+  height: calc(100vh - 60px);
+  overflow: hidden;
 }
-.bttn{
-    position: sticky;
-    bottom: 0;
+.bttn {
+  position: sticky;
+  bottom: 0;
 }
-.box{
-    background: #EEEEEE;
-    margin-left: 15%;
-    margin-right: 15%;
-    height: 90%;
-    width: 70%;
-    overflow: auto;
+.box {
+  background: #eeeeee;
+  margin-left: 15%;
+  margin-right: 15%;
+  height: calc(90% - 60px);
+  width: 70%;
+  overflow: auto;
+}
+.imgback {
+  background-image: url("./assets/priscilla-du-preez-DLuorYRjxJw-unsplash.jpg");
+  background-position: center;
+  background-size: cover;
+  height: calc(100vh - 60px);
+}
+.imgbackSignIn {
+  background-image: url("./assets/loginP.jpg");
+  background-position: center;
+  background-size: cover;
+  height: calc(100vh - 60px);
+}
 
+.mg {
+  margin-top: 20%;
+}
+
+.start {
+  justify-content: flex-start !important;
+}
+.end {
+  margin-right: 5% !important;
+  justify-content: flex-end !important;
+}
+
+@media screen and (max-width: 768px) {
+  .imgback {
+    height: 50vh !important;
+  }
+  .imgbackSignIn {
+    height: 50vh !important;
+  }
+  .start {
+    margin-right: 5% !important;
+  }
+  .end {
+    justify-content: flex-start !important;
+  }
 }

@@ -1,11 +1,24 @@
 import React from "react";
-import { Button, Card, Image } from "react-bootstrap";
-import download from "../Assets/download.jpg";
+import { Card, Image } from "react-bootstrap";
+import { useNavigate } from "react-router";
+import download from "../assets/download.jpg";
 
 const ChatBubbles = () => {
+  const navigate = useNavigate();
+  const GoToChat = () => {
+    navigate("/Chat");
+  };
   return (
     <>
-      <Card className="ms-5 mb-3 p-2" style={{ width: "17rem", backgroundColor: "#EEEEEE" }}>
+      <Card
+        className="ms-5 mb-3 p-2"
+        style={{
+          width: "17rem",
+          backgroundColor: "#EEEEEE",
+          cursor: "pointer",
+        }}
+        onClick={() => GoToChat()}
+      >
         <div className="d-flex gap-3">
           <Image
             roundedCircle
@@ -18,7 +31,15 @@ const ChatBubbles = () => {
           </div>
         </div>
       </Card>
-      <Card className="ms-5 mb-3 p-2 " style={{ width: "17rem", backgroundColor: "#EEEEEE" }}>
+      <Card
+        className="ms-5 mb-3 p-2 "
+        style={{
+          width: "17rem",
+          backgroundColor: "#EEEEEE",
+          cursor: "pointer",
+        }}
+        onClick={() => GoToChat()}
+      >
         <div className="d-flex gap-3">
           <Image
             roundedCircle
@@ -31,7 +52,15 @@ const ChatBubbles = () => {
           </div>
         </div>
       </Card>
-      <Card className="ms-5 mb-3 p-2 " style={{ width: "17rem", backgroundColor: "#EEEEEE" }}>
+      <Card
+        className="ms-5 mb-3 p-2 "
+        style={{
+          width: "17rem",
+          backgroundColor: "#EEEEEE",
+          cursor: "pointer",
+        }}
+        onClick={() => GoToChat()}
+      >
         <div className="d-flex gap-3">
           <Image
             roundedCircle
@@ -43,7 +72,7 @@ const ChatBubbles = () => {
             <Card.Text className="text-dark">I'm Hamada</Card.Text>
           </div>
         </div>
-      </Card> 
+      </Card>
     </>
   );
 };

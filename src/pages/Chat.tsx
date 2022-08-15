@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Button, InputGroup } from "react-bootstrap";
+import { Button, InputGroup, Row } from "react-bootstrap";
 import Header from "../components/Header";
-import img from "../assets/kimson-doan-AZMmUy2qL6A-unsplash.jpg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import moment from "moment";
@@ -63,14 +62,19 @@ const Chat = () => {
       <Header name={"Chat"} />
       <div className="bgg pt-5">
         <ScrollToBottom className="mt-5 box">
-          <div className="ms-5 mt-5">
+          <div className="ms-5 mt-3">
             {messages.map((message) => (
-              <div key={message?.id}>
+              <Row
+                key={message?.id}
+                className={`${
+                  message?.type === "reply" ? "end my-3" : "start my-3"
+                }`}
+              >
                 <Message message={message} /> <br />
-              </div>
+              </Row>
             ))}
           </div>
-          <div className="d-flex justify-content-between bttn">
+          <Row className="bttn">
             <InputGroup>
               <textarea
                 id="form3Example1c"
@@ -79,14 +83,14 @@ const Chat = () => {
                 value={formik.values.message}
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
-                rows={2}
+                rows={1}
                 cols={150}
               ></textarea>
-                <Button variant="dark" onClick={() => formik.handleSubmit()} style={{width:'10%'}}>
-                  Send
-                </Button>
+              <Button variant="dark" onClick={() => formik.handleSubmit()}>
+                Send
+              </Button>
             </InputGroup>
-          </div>
+          </Row>
         </ScrollToBottom>
       </div>
     </section>

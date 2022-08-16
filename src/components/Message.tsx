@@ -4,7 +4,7 @@ import { AppProps } from "../types";
 import { captilize, getTime } from "../utiles/functions";
 
 const Message = ({ message }: AppProps) => {
-  const name = captilize(message?.name as string);
+  const name = captilize(`${message?.user.firstName} ${message?.user.lastName}` as string);
   const time = getTime(message?.createdAt as Date);
   return (
     <Col lg={6} md={5} style={{ color: "black", background: "white" }}>

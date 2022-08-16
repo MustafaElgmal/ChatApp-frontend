@@ -1,62 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, InputGroup, Row } from "react-bootstrap";
 import Header from "../components/Header";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import moment from "moment";
 import Message from "../components/Message";
-import { MessageType } from "../types";
+import { authStateType, MessageType } from "../types";
 import ScrollToBottom from "react-scroll-to-bottom";
+import { createMessage, getMessagesByConversationId } from "../utiles/apis";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router";
 
 const Chat = () => {
-  const [messages, setMassage] = useState<MessageType[]>([
-    {
-      id: 1,
-      name: "mostafa",
-      body: "How is it going?",
-      type: "message",
-      createdAt: new Date(moment().format()),
-    },
-    {
-      id: 2,
-      name: "Ahmed",
-      body: "I am very good!",
-      type: "reply",
-      createdAt: new Date(moment().format()),
-    },
-    {
-      id: 3,
-      name: "mostafa",
-      body: "What about Tawwr bootCamp ?",
-      type: "message",
-      createdAt: new Date(moment().format()),
-    },
-    {
-      id: 4,
-      name: "Ahmed",
-      body: "It is very good.We do a lot of tasks and learn a lot of new things like React js.Realy, I recomended this for you.",
-      type: "reply",
-      createdAt: new Date(moment().format()),
-    },
-    {
-      id: 5,
-      name: "mostafa",
-      body: "I do that After this batch.Thank You",
-      type: "message",
-      createdAt: new Date(moment().format()),
-    },
-  ]);
+  const {id}=useParams()
+  const [messages, setMassage] = useState<MessageType[]>([]);
+  const token=useSelector((state:authStateType)=>state.auth.token)
   const formik = useFormik({
     initialValues: {
-      message: "",
+      body: "",
     },
     validationSchema: Yup.object({
-      message: Yup.string().required(),
+      body: Yup.string().required(),
     }),
     onSubmit: async (values) => {
-      console.log(values);
+      await createMessage(token,parseInt(id!),values)
+      formik.resetForm()
     },
   });
+  const getAllMessagesInConv=async()=>{
+    await getMessagesByConversationId(token,parseInt(id!),setMassage)
+  }
+  useEffect(()=>{
+    getAllMessagesInConv()
+
+  },[])
   return (
     <section>
       <Header name={"Chat"} />
@@ -79,8 +55,8 @@ const Chat = () => {
               <textarea
                 id="form3Example1c"
                 className="form-control"
-                name="message"
-                value={formik.values.message}
+                name="body"
+                value={formik.values.body}
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 rows={1}

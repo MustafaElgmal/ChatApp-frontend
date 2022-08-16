@@ -1,21 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import chat from "../assets/Chat.jpg";
 import ChatBubbles from "../components/ChatBubbles";
 import Header from "../components/Header";
+import { authStateType, ConversationType } from "../types";
+import { getConversations } from "../utiles/apis";
 
 const GroupChat = () => {
+  const token=useSelector((state:authStateType)=>state.auth.token)
+  const [conversations,setConversation]=useState<ConversationType[]>([])
+
+  const getAllConversation=async()=>{
+    await getConversations(token,setConversation)
+  }
+
+  useEffect(()=>{
+    getAllConversation()
+
+  },[])
+ 
   return (
-    <div>
-      <Header name={`Conversation`} />
-      <Card className="bg-dark text-white">
-        <Card.Img src={chat} alt="Card image" />
-        <Card.ImgOverlay>
-          <ChatBubbles />
-          <ChatBubbles />
-        </Card.ImgOverlay>
-      </Card>
-    </div>
+    <section>
+      <Header name={`Conversations`} />
+      <div className="bgg" style={{overflow: 'auto'}}>
+        {conversations.map((conversation)=>(<ChatBubbles key={conversation.id} conversation={conversation} />))}
+       
+      </div>
+      
+      
+      </section>
   );
 };
 

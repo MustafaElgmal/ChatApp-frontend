@@ -1,12 +1,16 @@
-import React from "react";
-import { Navbar, Button, Container } from "react-bootstrap";
+import React, { useState } from "react";
+import { Navbar, Button, Container, Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { authStateType } from "../types";
 import { handelLogout } from "../redux/features/authSlice";
 import img from "../assets/icons8-arrow-pointing-left-24.png";
 import { useNavigate } from "react-router";
+import { PlusSquareFill } from "react-bootstrap-icons";
+import NewConversation from "./NewConversation";
+import { setNestedObjectValues } from "formik";
 
 const Header = ({ name }: { name: string }) => {
+  const [show, setShow] = useState(false);
   const isLoggedIn = useSelector(
     (state: authStateType) => state.auth.isLoggedIn
   );
@@ -34,14 +38,25 @@ const Header = ({ name }: { name: string }) => {
           ) : null}
           <Navbar.Text>{name}</Navbar.Text>
         </Navbar.Brand>
-        <Navbar.Collapse className="justify-content-end">
+        <Navbar.Collapse className="justify-content-end gap-3">
           {isLoggedIn ? (
-            <Button variant="dark" onClick={() => Logout()}>
-              Logout
-            </Button>
+            <Dropdown>
+              <Dropdown.Toggle
+                variant="dark"
+                id="dropdown-basic"
+              ></Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => setShow(true)}>
+                  New conversation
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => Logout()}>Logout</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           ) : null}
         </Navbar.Collapse>
       </Container>
+      <NewConversation show={show} onHide={() => setShow(false)} />
     </Navbar>
   );
 };

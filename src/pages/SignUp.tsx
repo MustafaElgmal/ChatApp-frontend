@@ -30,10 +30,15 @@ const SignUp = () => {
     onSubmit: async (values) => {
       console.log(values);
       const res = await createUser(values, dispatch);
-      if (res?.status=== 201) {
+
+
+      if(res?.status===201){
         formik.resetForm();
-        navigate("/");
+         navigate("/");
       }
+        
+     
+
     },
   });
   return (

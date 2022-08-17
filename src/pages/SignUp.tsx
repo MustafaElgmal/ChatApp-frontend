@@ -4,7 +4,6 @@ import { Image, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import * as Yup from "yup";
-import img from "../assets/priscilla-du-preez-DLuorYRjxJw-unsplash.jpg";
 import Header from "../components/Header";
 import { createUser } from "../utiles/apis";
 
@@ -17,6 +16,7 @@ const SignUp = () => {
       lastName: "",
       email: "",
       password: "",
+     ImgUrl: "https://review2020.s3.amazonaws.com/1651037192205moo.jpg",
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required("FirstName is required!"),
@@ -25,12 +25,15 @@ const SignUp = () => {
         .email("Email is not vaild!")
         .required("Email is required!"),
       password: Yup.string().required("Password is required!"),
+      ImgUrl: Yup.string().url("Please Enter Url!"),
     }),
     onSubmit: async (values) => {
+      console.log(values);
       const res = await createUser(values, dispatch);
-      console.log(res);
-      formik.resetForm();
-      navigate("/");
+      if (res?.status=== 201) {
+        formik.resetForm();
+        navigate("/");
+      }
     },
   });
   return (
@@ -119,6 +122,26 @@ const SignUp = () => {
                 <p className="text-danger">
                   {formik.errors.password && formik.touched.password
                     ? formik.errors.password
+                    : null}
+                </p>
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <div className="form-outline  mb-0">
+                <label style={{ color: "#686868" }}>ImgUrl</label>
+                <input
+                  type="ImgUrl"
+                  id="form3Example5c"
+                  className="form-control w-100"
+                  name="ImgUrl"
+                  value={formik.values.ImgUrl}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                />
+                <p className="text-danger">
+                  {formik.errors.ImgUrl && formik.touched.ImgUrl
+                    ? formik.errors.ImgUrl
                     : null}
                 </p>
               </div>

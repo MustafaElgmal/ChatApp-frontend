@@ -11,6 +11,7 @@ export interface MessageType {
   name: string;
   body: string;
   createdAt: Date;
+  updatedAt:Date
   type: string;
   user:UserType
 }
@@ -21,6 +22,7 @@ export interface createUserType {
   lastName: string;
   email: string;
   password: string;
+  ImgUrl:string
 }
 export interface UserType extends createUserType{
   id:number,

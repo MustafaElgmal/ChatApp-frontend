@@ -42,9 +42,9 @@ export const validateUser = async (
   }
 };
 
-export const getUsers=async(setUsers:Function)=>{
+export const getUsers=async(setUsers:Function,token:string)=>{
   try{
-    const res=await axios.get(`${BaseUrl}/users`)
+    const res=await axios.get(`${BaseUrl}/users`,{headers:{'authorization':token}})
     setUsers(res.data.users)
   }catch(e){
     console.log(e)

@@ -1,10 +1,11 @@
 import React from "react";
 import { Button, Card, Image } from "react-bootstrap";
 import { useNavigate } from "react-router";
-import download from "../assets/download.jpg";
-import { AppProps } from "../types";
+import { AppProps, MessageType } from "../types";
+import { getLastMessage } from "../utiles/functions";
 
 const ChatBubbles = ({conversation}:AppProps) => {
+  const lastMessage:MessageType=getLastMessage(conversation?.messages!)
   const navigate = useNavigate();
   const GoToChat = () => {
     navigate(`/Chat/${conversation?.id}`);
@@ -23,11 +24,11 @@ const ChatBubbles = ({conversation}:AppProps) => {
         <Image
           roundedCircle
           style={{ width: "90px", height: "90px" }}
-          src={download}
+          src={conversation?.users[0].ImgUrl}
         />
         <div className="mt-2">
           <Card.Title className="text-dark">{conversation?.title}</Card.Title>
-          <Card.Text className="text-dark">I'm Hamada</Card.Text>
+          <Card.Text className="text-dark">{lastMessage?.body}</Card.Text>
         </div>
       </div>
     </Card>

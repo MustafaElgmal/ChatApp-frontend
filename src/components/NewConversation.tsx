@@ -20,10 +20,11 @@ const NewConversation = ({ show, onHide }: AppProps) => {
     onSubmit: async (values) => {
       await CreateConversation(values,token)
       formik.resetForm()
+      onHide && onHide();
     },
   });
   const getAllUsers=async()=>{
-    await getUsers(setUsers)
+    await getUsers(setUsers,token)
   }
   useEffect(()=>{
     getAllUsers()

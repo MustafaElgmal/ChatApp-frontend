@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
+import {  Col } from "react-bootstrap";
 import { AppProps } from "../types";
 import { captilize, getTime } from "../utiles/functions";
 

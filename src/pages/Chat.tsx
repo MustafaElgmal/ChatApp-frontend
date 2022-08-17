@@ -43,7 +43,7 @@ const Chat = () => {
               <Row
                 key={message?.id}
                 className={`${
-                  message?.type === "reply" ? "end my-3" : "start my-3"
+                  message?.type === "create" ? "end my-3" : "start my-3"
                 }`}
               >
                 <Message message={message} /> <br />

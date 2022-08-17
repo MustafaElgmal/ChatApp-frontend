@@ -24,7 +24,7 @@ const ChatBubbles = ({conversation}:AppProps) => {
         <Image
           roundedCircle
           style={{ width: "90px", height: "90px" }}
-          src={conversation?.users[0].ImgUrl}
+          src={conversation?.users[1].ImgUrl}
         />
         <div className="mt-2">
           <Card.Title className="text-dark">{conversation?.title}</Card.Title>

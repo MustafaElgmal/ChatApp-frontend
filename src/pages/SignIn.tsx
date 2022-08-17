@@ -22,8 +22,10 @@ const SignIn = () => {
     }),
     onSubmit: async (values) => {
       const res = await validateUser(values, dispatch);
-      formik.resetForm();
-      navigate("/");
+      if (res?.status === 200) {
+        formik.resetForm();
+        navigate("/");
+      }
     },
   });
   return (

@@ -30,7 +30,7 @@ function App() {
           element={isLoggedIn ? <Navigate to="/" /> : <Login />}
         />
         <Route
-          path="/Chat"
+          path="/Chat/:id"
           element={
             <Protected>
               <Chat />

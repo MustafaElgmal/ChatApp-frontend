@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Image } from "react-bootstrap";
+import { Button, Card, Image } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { AppProps, MessageType } from "../types";
 import { getLastMessage } from "../utiles/functions";

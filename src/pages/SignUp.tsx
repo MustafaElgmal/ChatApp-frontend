@@ -16,7 +16,7 @@ const SignUp = () => {
       lastName: "",
       email: "",
       password: "",
-      ImgUrl:'https://review2020.s3.amazonaws.com/1651037192205moo.jpg'
+     ImgUrl: "https://review2020.s3.amazonaws.com/1651037192205moo.jpg",
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required("FirstName is required!"),
@@ -25,17 +25,20 @@ const SignUp = () => {
         .email("Email is not vaild!")
         .required("Email is required!"),
       password: Yup.string().required("Password is required!"),
-      ImgUrl:Yup.string().url('Please Enter Url!')
+      ImgUrl: Yup.string().url("Please Enter Url!"),
     }),
     onSubmit: async (values) => {
+      console.log(values);
       const res = await createUser(values, dispatch);
+
+
       if(res?.status===201){
         formik.resetForm();
          navigate("/");
       }
         
      
-      
+
     },
   });
   return (

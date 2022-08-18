@@ -75,7 +75,7 @@ export const getConversations=async(token:string,setConversation:Function)=>{
 export const createMessage=async(token:string,id:number,message:{body:string})=>{
   try{
     const res=await axios.post(`${BaseUrl}/messages/${id}`,message,{headers:{'authorization':token}})
-    console.log(res)
+    return res
   }catch(e){
     console.log(e)
   }

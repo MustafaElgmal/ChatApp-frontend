@@ -4,15 +4,15 @@ import Header from "../components/Header";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Message from "../components/Message";
-import { authStateType, MessageType } from "../types";
+import { AppProps, authStateType, MessageType } from "../types";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { createMessage, getMessagesByConversationId } from "../utiles/apis";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 
-const Chat = () => {
+const Chat = ({socket}:AppProps) => {
   const {id}=useParams()
-  const [messages, setMassage] = useState<MessageType[]>([]);
+  const [messages, setMessages] = useState<MessageType[]>([]);
   const token=useSelector((state:authStateType)=>state.auth.token)
   const formik = useFormik({
     initialValues: {
@@ -22,17 +22,31 @@ const Chat = () => {
       body: Yup.string().required(),
     }),
     onSubmit: async (values) => {
-      await createMessage(token,parseInt(id!),values)
+      const res=await createMessage(token,parseInt(id!),values)
+      if(res?.status===201){
+        socket?.emit('send_message',res.data.message)
+      }
       formik.resetForm()
+      
+
     },
   });
   const getAllMessagesInConv=async()=>{
-    await getMessagesByConversationId(token,parseInt(id!),setMassage)
+       await getMessagesByConversationId(token,parseInt(id!),setMessages)
   }
   useEffect(()=>{
-    getAllMessagesInConv()
+    socket?.on('recieve_message',(message)=>{
+      if(message.socketId===socket.id){
+        setMessages((prevMessages)=>[...prevMessages,{...message.message,type:'create'}])
+      }else{
+        setMessages((prevMessages)=>[...prevMessages,{...message.message,type:'replay'}])
 
+      }
+      
+    })
+    getAllMessagesInConv()
   },[])
+
   return (
     <section>
       <Header name={"Chat"} />
@@ -62,7 +76,7 @@ const Chat = () => {
                 rows={1}
                 cols={150}
               ></textarea>
-              <Button variant="dark" onClick={() => formik.handleSubmit()}>
+              <Button style={{background:'#0CA47E',borderColor:'#0CA47E'}} onClick={() => formik.handleSubmit()}>
                 Send
               </Button>
             </InputGroup>

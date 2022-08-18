@@ -46,6 +46,14 @@
   left: 30% !important;
   top:5% !important
 }
+.create{
+  color: white;
+  background-color: #0CA47E;
+}
+.replay{
+  color:white;
+  background-color:#2E373E;
+}
 
 @media screen and (max-width: 768px) {
   .imgback {

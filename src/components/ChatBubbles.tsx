@@ -1,15 +1,21 @@
-import React from "react";
-import { Button, Card, Image } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Card, Image } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { AppProps, MessageType } from "../types";
-import { getLastMessage } from "../utiles/functions";
+import { captilize, getLastMessage } from "../utiles/functions";
 
-const ChatBubbles = ({conversation}:AppProps) => {
-  const lastMessage:MessageType=getLastMessage(conversation?.messages!)
+const ChatBubbles = ({ conversation, socket }: AppProps) => {
+  const lastMessage: MessageType = getLastMessage(conversation?.messages!);
+  const name = captilize(conversation?.name!);
   const navigate = useNavigate();
   const GoToChat = () => {
     navigate(`/Chat/${conversation?.id}`);
   };
+
+  useEffect(() => {
+    socket?.emit("join_conversation", conversation?.id.toString());
+  }, [socket]);
+
   return (
     <Card
       className="ms-5 mb-3 p-2"
@@ -24,10 +30,10 @@ const ChatBubbles = ({conversation}:AppProps) => {
         <Image
           roundedCircle
           style={{ width: "90px", height: "90px" }}
-          src={conversation?.users[1].ImgUrl}
+          src={conversation?.ImgUrl}
         />
         <div className="mt-2">
-          <Card.Title className="text-dark">{conversation?.title}</Card.Title>
+          <Card.Title className="text-dark">{name}</Card.Title>
           <Card.Text className="text-dark">{lastMessage?.body}</Card.Text>
         </div>
       </div>

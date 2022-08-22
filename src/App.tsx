@@ -29,7 +29,10 @@ function App() {
             </Protected>
           }
         />
-        <Route path="/Signup" element={isLoggedIn ? <Navigate to="/" /> : <SignUp />} />
+        <Route
+          path="/Signup"
+          element={isLoggedIn ? <Navigate to="/" /> : <SignUp />}
+        />
         <Route
           path="/login"
           element={isLoggedIn ? <Navigate to="/" /> : <Login />}

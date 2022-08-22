@@ -1,39 +1,41 @@
-import { useFormik } from "formik";
+import { useFormik, validateYupSchema } from "formik";
 import React, { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import { AppProps, authStateType, UserType, UserTypes } from "../types";
+import { AppProps, UserType } from "../types";
 import * as Yup from "yup";
 import { CreateConversation, getUsers } from "../utiles/apis";
-import { useSelector } from "react-redux";
 import UserBubbles from "./UserBubbles";
+import { useAppSelector } from "../utiles/hookes";
 
 const NewConversation = ({ show, onHide }: AppProps) => {
-  const [users,setUsers]=useState<UserTypes[]>([])
-  const usersGroupSelected:UserType[]=[]
-  const token=useSelector((state:authStateType)=>state.auth.token)
+  const [users,setUsers]=useState<UserType[]>([])
+  const [usersGroupSelected,setUsersGroupSelected]=useState<UserType[]>([])
+  const [userIds,setUserIds]=useState<number[]>([])
+  const token=useAppSelector((state)=>state.auth.token)
   const formik = useFormik({
     initialValues:{
-      title: "",
-      userIds:[] as number[],
+      title: ""
     },
     validationSchema: Yup.object({
       title: Yup.string().required("Title of Conversation is required!"),
     }),
     onSubmit: async (values) => {
-      console.log(values)
-      const res=await CreateConversation(values,token)
+      console.log({...values,userIds})
+      const res=await CreateConversation({...values,userIds},token)
       if(res?.status===201){
         alert('Added conversation!')
+        setUsersGroupSelected([])
+        setUserIds([])
         formik.resetForm()
         onHide && onHide();
       }
       
     },
   });
-  const AddToGroup=(user:UserType)=>{
-    formik.values.userIds.push(user.id)
-    usersGroupSelected.push(user)
-
+  const AddToGroup=(user:any)=>{
+    userIds.push(user.id)
+    setUserIds(userIds)
+    setUsersGroupSelected((prevUsers)=>[...prevUsers,{...user}])
   }
   const getAllUsers=async()=>{
     await getUsers(setUsers,token)

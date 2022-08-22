@@ -6,17 +6,17 @@ import SignUp from "./pages/SignUp";
 import GroupChat from "./pages/GroupChat";
 import Login from "./pages/SignIn";
 import Protected from "./components/Protected";
-import { useSelector } from "react-redux";
-import { authStateType } from "./types";
 import io from 'socket.io-client'
 import { Socket } from "socket.io-client";
+import { useAppSelector } from "./utiles/hookes";
+import { BASE_URL } from "./constants.ts";
 function App() {
   const [socket,setSocket]=useState<Socket>()
-  const isLoggedIn = useSelector(
-    (state: authStateType) => state.auth.isLoggedIn
+  const isLoggedIn = useAppSelector(
+    (state) => state.auth.isLoggedIn
   );
   useEffect(()=>{
-    isLoggedIn?setSocket(io('http://localhost:3500')):setSocket(undefined)
+    isLoggedIn?setSocket(io(BASE_URL)):setSocket(undefined)
   },[])
   return (
     <div className="App" style={{ background: "#F8F9FA" }}>

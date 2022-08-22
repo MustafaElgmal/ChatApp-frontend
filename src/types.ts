@@ -7,7 +7,9 @@ export interface AppProps {
   socket?:Socket
   user?:UserType,
   AddToGroup?:Function
-}
+  // ref?: Function
+  }
+
 
 export interface MessageType {
   id: number;

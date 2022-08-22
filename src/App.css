@@ -5,10 +5,12 @@
   height: calc(100vh - 60px);
   overflow: hidden;
 }
+
 .bttn {
   position: sticky;
   bottom: 0;
 }
+
 .box {
   background: #eeeeee;
   margin-left: 15%;
@@ -17,12 +19,14 @@
   width: 70%;
   overflow: auto;
 }
+
 .imgback {
   background-image: url("./assets/priscilla-du-preez-DLuorYRjxJw-unsplash.jpg");
   background-position: center;
   background-size: cover;
   height: calc(100vh - 60px);
 }
+
 .imgbackSignIn {
   background-image: url("./assets/loginP.jpg");
   background-position: center;
@@ -37,31 +41,43 @@
 .start {
   justify-content: flex-start !important;
 }
+
 .end {
   margin-right: 5% !important;
   justify-content: flex-end !important;
 }
+
 .mmg {
   left: 30% !important;
   top: 5% !important;
 }
+
 .create {
   color: white;
   background-color: #0ca47e;
 }
+
 .replay {
   color: white;
   background-color: #2e373e;
 }
+
 .cardG {
   width: 14rem;
   cursor: pointer;
 }
+
 .userGroup {
   -ms-overflow-style: none;
   scrollbar-width: none;
   overflow-y: scroll;
   height: 50vh;
+}
+.selectedUsers{
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: scroll;
+  width: 100%;
 }
 
 .cardG:hover {
@@ -72,10 +88,12 @@
   width: 30%;
   margin-left: 30%;
 }
+
 /* Bootstrap 4 text input with search icon */
 .has-search .form-control {
   padding-left: 2rem;
 }
+
 .has-search .form-control-feedback {
   position: absolute;
   z-index: 2;
@@ -92,12 +110,15 @@
   .imgback {
     height: 50vh !important;
   }
+
   .imgbackSignIn {
     height: 50vh !important;
   }
+
   .start {
     margin-right: 5% !important;
   }
+
   .end {
     justify-content: flex-start !important;
   }

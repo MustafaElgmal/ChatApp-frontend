@@ -40,7 +40,6 @@ export const validateUser = async (
     console.log(e);
   }
 };
-
 export const getUsers=async(setUsers:Function,token:string)=>{
   try{
     const res=await axios.get(`${BASE_URL}/users`,{headers:{'authorization':token}})
@@ -50,46 +49,66 @@ export const getUsers=async(setUsers:Function,token:string)=>{
   }
 }
 
-export const CreateConversation=async(conversation:{title:string,userIds:number[]},token:string)=>{
-  try{
-    const res=await axios.post(`${BASE_URL}/conversations`,conversation,{headers:{'authorization':token}})
-    return res
-  }catch(e:any){
+export const CreateConversation = async (
+  conversation: { title: string; userIds: number[] },
+  token: string
+) => {
+  try {
+    const res = await axios.post(`${BASE_URL}/conversations`, conversation, {
+      headers: { authorization: token },
+    });
+    return res;
+  } catch (e: any) {
     if (e.response.status !== 500) {
       return alert(e.response.data.messages[0].message);
     }
-    console.log(e)
+    console.log(e);
   }
+};
 
-}
 
-export const getConversations=async(token:string,setConversation:Function,setConversationFilter:Function)=>{
-  try{
-    const res=await axios.get(`${BASE_URL}/conversations`,{headers:{'authorization':token}})
-    setConversation(res.data.conversations)
-    setConversationFilter(res.data.conversations)
-  }catch(e){
-    console.log(e)
+export const getConversations = async (
+  token: string,
+  setConversation: Function,
+  setConversationFilter: Function
+) => {
+  try {
+    const res = await axios.get(`${BASE_URL}/conversations`, {
+      headers: { authorization: token },
+    });
+    setConversation(res.data.conversations);
+    setConversationFilter(res.data.conversations);
+  } catch (e) {
+    console.log(e);
   }
-}
+};
 
-export const createMessage=async(token:string,id:number,message:{body:string})=>{
-  try{
-    const res=await axios.post(`${BASE_URL}/messages/${id}`,message,{headers:{'authorization':token}})
-    return res
-  }catch(e){
-    console.log(e)
+export const createMessage = async (
+  token: string,
+  id: number,
+  message: { body: string }
+) => {
+  try {
+    const res = await axios.post(`${BASE_URL}/messages/${id}`, message, {
+      headers: { authorization: token },
+    });
+    return res;
+  } catch (e) {
+    console.log(e);
   }
-
-}
-
-export const getMessagesByConversationId=async(token:string,id:number,setMassage:Function)=>{
-  try{
-    const res=await axios.get(`${BASE_URL}/messages/${id}`,{headers:{'authorization':token}})
-    setMassage(res.data.messages)
-
-  }catch(e){
-    console.log(e)
+};
+export const getMessagesByConversationId = async (
+  token: string,
+  id: number,
+  setMassage: Function
+) => {
+  try {
+    const res = await axios.get(`${BASE_URL}/messages/${id}`, {
+      headers: { authorization: token },
+    });
+    setMassage(res.data.messages);
+    console.log(res);
+  } catch (e) {
+    console.log(e);
   }
-
-}
+};

@@ -6,7 +6,7 @@ import SignUp from "./pages/SignUp";
 import GroupChat from "./pages/GroupChat";
 import Login from "./pages/SignIn";
 import Protected from "./components/Protected";
-import io from 'socket.io-client'
+import io from "socket.io-client";
 import { Socket } from "socket.io-client";
 import { useAppSelector } from "./utiles/hookes";
 import { BASE_URL } from "./constants.ts";
@@ -25,7 +25,7 @@ function App() {
           path="/"
           element={
             <Protected>
-              <GroupChat socket={socket}/>
+              <GroupChat socket={socket} />
             </Protected>
           }
         />
@@ -41,7 +41,7 @@ function App() {
           path="/Chat/:id"
           element={
             <Protected>
-              <Chat  socket={socket}/>
+              <Chat socket={socket} />
             </Protected>
           }
         />

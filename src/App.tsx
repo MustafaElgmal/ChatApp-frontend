@@ -8,16 +8,16 @@ import Login from "./pages/SignIn";
 import Protected from "./components/Protected";
 import { useSelector } from "react-redux";
 import { authStateType } from "./types";
-import io from 'socket.io-client'
+import io from "socket.io-client";
 import { Socket } from "socket.io-client";
 function App() {
-  const [socket,setSocket]=useState<Socket>()
+  const [socket, setSocket] = useState<Socket>();
   const isLoggedIn = useSelector(
     (state: authStateType) => state.auth.isLoggedIn
   );
-  useEffect(()=>{
-    isLoggedIn?setSocket(io('http://localhost:3500')):setSocket(undefined)
-  },[])
+  useEffect(() => {
+    isLoggedIn ? setSocket(io("http://localhost:3500")) : setSocket(undefined);
+  }, []);
   return (
     <div className="App" style={{ background: "#F8F9FA" }}>
       <Routes>
@@ -25,7 +25,7 @@ function App() {
           path="/"
           element={
             <Protected>
-              <GroupChat socket={socket}/>
+              <GroupChat socket={socket} />
             </Protected>
           }
         />
@@ -41,7 +41,7 @@ function App() {
           path="/Chat/:id"
           element={
             <Protected>
-              <Chat  socket={socket}/>
+              <Chat socket={socket} />
             </Protected>
           }
         />

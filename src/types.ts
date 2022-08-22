@@ -1,9 +1,12 @@
+import { Socket } from 'socket.io-client';
 export interface AppProps {
   message?: MessageType;
   show?:boolean,
   onHide?:Function
   conversation?:ConversationType
-  
+  socket?:Socket
+  user?:UserType,
+  AddToGroup?:Function
 }
 
 export interface MessageType {
@@ -13,7 +16,8 @@ export interface MessageType {
   createdAt: Date;
   updatedAt:Date
   type: string;
-  user:UserType
+  user:UserType,
+  conversation:ConversationType
 }
 
 
@@ -57,6 +61,13 @@ export interface ConversationType{
   users:UserType[],
   createdAt:Date,
   updatedAt:Date
+  ImgUrl:string,
+  name:string
+}
 
-
+export interface ConversationActionType{
+  type:string,
+  payload:{
+    conversations:ConversationType[]
+  }
 }

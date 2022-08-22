@@ -7,7 +7,7 @@ const Message = ({ message }: AppProps) => {
   const name = captilize(`${message?.user.firstName} ${message?.user.lastName}` as string);
   const time = getTime(message?.createdAt as Date);
   return (
-    <Col lg={6} md={5} style={{ color: "black", background: "white" }}>
+    <Col lg={6} md={5} className={message?.type==='create'?'create':'replay'}>
       <div>
         <p className="fs-5">{name}</p>
         <p>{message?.body}</p>

@@ -1,4 +1,5 @@
-import { MessageType } from "./../types";
+
+import {  MessageType } from "./../types";
 import moment from "moment";
 
 export const display = () => {

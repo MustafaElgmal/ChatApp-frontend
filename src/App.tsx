@@ -9,7 +9,10 @@ import Protected from "./components/Protected";
 import { useSelector } from "react-redux";
 import { authStateType } from "./types";
 
+
 function App() {
+
+
   const isLoggedIn = useSelector(
     (state: authStateType) => state.auth.isLoggedIn
   );
@@ -24,7 +27,10 @@ function App() {
             </Protected>
           }
         />
-        <Route path="/Signup" element={isLoggedIn ? <Navigate to="/" /> : <SignUp />} />
+        <Route
+          path="/Signup"
+          element={isLoggedIn ? <Navigate to="/" /> : <SignUp />}
+        />
         <Route
           path="/login"
           element={isLoggedIn ? <Navigate to="/" /> : <Login />}

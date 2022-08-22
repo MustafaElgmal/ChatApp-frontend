@@ -16,7 +16,7 @@ function App() {
     (state: authStateType) => state.auth.isLoggedIn
   );
   useEffect(()=>{
-    setSocket(io('http://localhost:3500'))
+    isLoggedIn?setSocket(io('http://localhost:3500')):setSocket(undefined)
   },[])
   return (
     <div className="App" style={{ background: "#F8F9FA" }}>
@@ -25,7 +25,7 @@ function App() {
           path="/"
           element={
             <Protected>
-              <GroupChat socket={socket} />
+              <GroupChat socket={socket}/>
             </Protected>
           }
         />

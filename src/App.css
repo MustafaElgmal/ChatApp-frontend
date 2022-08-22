@@ -41,18 +41,51 @@
   margin-right: 5% !important;
   justify-content: flex-end !important;
 }
-.mmg{
-  
+.mmg {
   left: 30% !important;
-  top:5% !important
+  top: 5% !important;
 }
-.create{
+.create {
   color: white;
-  background-color: #0CA47E;
+  background-color: #0ca47e;
 }
-.replay{
-  color:white;
-  background-color:#2E373E;
+.replay {
+  color: white;
+  background-color: #2e373e;
+}
+.cardG {
+  width: 14rem;
+  cursor: pointer;
+}
+.userGroup {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll;
+  height: 50vh;
+}
+
+.cardG:hover {
+  background-color: #eee;
+}
+
+.main {
+  width: 30%;
+  margin-left: 30%;
+}
+/* Bootstrap 4 text input with search icon */
+.has-search .form-control {
+  padding-left: 2rem;
+}
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
 }
 
 @media screen and (max-width: 768px) {

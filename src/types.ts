@@ -5,7 +5,8 @@ export interface AppProps {
   onHide?:Function
   conversation?:ConversationType
   socket?:Socket
-  
+  user?:UserType,
+  AddToGroup?:Function
 }
 
 export interface MessageType {
@@ -62,4 +63,11 @@ export interface ConversationType{
   updatedAt:Date
   ImgUrl:string,
   name:string
+}
+
+export interface ConversationActionType{
+  type:string,
+  payload:{
+    conversations:ConversationType[]
+  }
 }

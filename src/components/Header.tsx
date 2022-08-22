@@ -7,7 +7,7 @@ import img from "../assets/icons8-arrow-pointing-left-24.png";
 import { useNavigate } from "react-router";
 import { PlusSquareFill } from "react-bootstrap-icons";
 import NewConversation from "./NewConversation";
-import { setNestedObjectValues } from "formik";
+
 
 const Header = ({ name }: { name: string }) => {
   const [show, setShow] = useState(false);
@@ -40,23 +40,25 @@ const Header = ({ name }: { name: string }) => {
         </Navbar.Brand>
         <Navbar.Collapse className="justify-content-end gap-3">
           {isLoggedIn ? (
-            <Dropdown>
-              <Dropdown.Toggle
-                variant="dark"
-                id="dropdown-basic"
-              ></Dropdown.Toggle>
+            <>
+              <Dropdown>
+                <Dropdown.Toggle
+                  variant="dark"
+                  id="dropdown-basic"
+                ></Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={() => setShow(true)}>
-                  New conversation
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => Logout()}>Logout</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => setShow(true)}>
+                    New conversation
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => Logout()}>Logout</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              <NewConversation show={show} onHide={() => setShow(false)} />
+            </>
           ) : null}
         </Navbar.Collapse>
       </Container>
-      <NewConversation show={show} onHide={() => setShow(false)} />
     </Navbar>
   );
 };

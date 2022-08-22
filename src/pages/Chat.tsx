@@ -27,12 +27,10 @@ const Chat = ({socket}:AppProps) => {
         socket?.emit('send_message',res.data.message)
       }
       formik.resetForm()
-      
-
     },
   });
   const getAllMessagesInConv=async()=>{
-       await getMessagesByConversationId(token,parseInt(id!),setMessages)
+     await getMessagesByConversationId(token,parseInt(id!),setMessages)
   }
   useEffect(()=>{
     socket?.on('recieve_message',(message)=>{

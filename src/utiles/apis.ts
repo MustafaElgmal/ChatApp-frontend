@@ -48,25 +48,27 @@ export const getUsers=async(setUsers:Function,token:string)=>{
     setUsers(res.data.users)
   }catch(e){
     console.log(e)
-
   }
 }
 
 export const CreateConversation=async(conversation:{title:string,userIds:number[]},token:string)=>{
   try{
     const res=await axios.post(`${BaseUrl}/conversations`,conversation,{headers:{'authorization':token}})
-    console.log(res)
-  }catch(e){
+    return res
+  }catch(e:any){
+    if (e.response.status !== 500) {
+      return alert(e.response.data.messages[0].message);
+    }
     console.log(e)
   }
 
 }
 
-export const getConversations=async(token:string,setConversation:Function)=>{
+export const getConversations=async(token:string,setConversation:Function,setConversationFilter:Function)=>{
   try{
     const res=await axios.get(`${BaseUrl}/conversations`,{headers:{'authorization':token}})
     setConversation(res.data.conversations)
-    console.log(res)
+    setConversationFilter(res.data.conversations)
   }catch(e){
     console.log(e)
   }

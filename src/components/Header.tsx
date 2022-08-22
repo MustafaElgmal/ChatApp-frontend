@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import { Navbar, Button, Container, Dropdown } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { authStateType } from "../types";
+import { Navbar, Container, Dropdown } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { handelLogout } from "../redux/features/authSlice";
 import img from "../assets/icons8-arrow-pointing-left-24.png";
 import { useNavigate } from "react-router";
-import { PlusSquareFill } from "react-bootstrap-icons";
 import NewConversation from "./NewConversation";
+import { useAppSelector } from "../utiles/hookes";
 
 
 const Header = ({ name }: { name: string }) => {
   const [show, setShow] = useState(false);
-  const isLoggedIn = useSelector(
-    (state: authStateType) => state.auth.isLoggedIn
+  const isLoggedIn = useAppSelector(
+    (state) => state.auth.isLoggedIn
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();

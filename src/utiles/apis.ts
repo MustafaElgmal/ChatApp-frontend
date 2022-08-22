@@ -2,12 +2,11 @@ import { createUserType } from "../types";
 import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
 import { handelLogin } from "../redux/features/authSlice";
-
-const BaseUrl = "http://localhost:3500";
+import { BASE_URL } from "../constants.ts";
 
 export const createUser = async (user: createUserType, dispatch: Dispatch) => {
   try {
-    const res = await axios.post(`${BaseUrl}/users`, user);
+    const res = await axios.post(`${BASE_URL}/users`, user);
     dispatch(handelLogin({ token: res.data.token }));
     localStorage.setItem(
       "user",
@@ -27,7 +26,7 @@ export const validateUser = async (
   dispatch: Dispatch
 ) => {
   try {
-    const res = await axios.post(`${BaseUrl}/users/signin`, user);
+    const res = await axios.post(`${BASE_URL}/users/signin`, user);
     dispatch(handelLogin({ token: res.data.token }));
     localStorage.setItem(
       "user",
@@ -41,24 +40,21 @@ export const validateUser = async (
     console.log(e);
   }
 };
-
-export const getUsers = async (setUsers: Function, token: string) => {
-  try {
-    const res = await axios.get(`${BaseUrl}/users`, {
-      headers: { authorization: token },
-    });
-    setUsers(res.data.users);
-  } catch (e) {
-    console.log(e);
+export const getUsers=async(setUsers:Function,token:string)=>{
+  try{
+    const res=await axios.get(`${BASE_URL}/users`,{headers:{'authorization':token}})
+    setUsers(res.data.users)
+  }catch(e){
+    console.log(e)
   }
-};
+}
 
 export const CreateConversation = async (
   conversation: { title: string; userIds: number[] },
   token: string
 ) => {
   try {
-    const res = await axios.post(`${BaseUrl}/conversations`, conversation, {
+    const res = await axios.post(`${BASE_URL}/conversations`, conversation, {
       headers: { authorization: token },
     });
     return res;
@@ -70,13 +66,14 @@ export const CreateConversation = async (
   }
 };
 
+
 export const getConversations = async (
   token: string,
   setConversation: Function,
   setConversationFilter: Function
 ) => {
   try {
-    const res = await axios.get(`${BaseUrl}/conversations`, {
+    const res = await axios.get(`${BASE_URL}/conversations`, {
       headers: { authorization: token },
     });
     setConversation(res.data.conversations);
@@ -92,7 +89,7 @@ export const createMessage = async (
   message: { body: string }
 ) => {
   try {
-    const res = await axios.post(`${BaseUrl}/messages/${id}`, message, {
+    const res = await axios.post(`${BASE_URL}/messages/${id}`, message, {
       headers: { authorization: token },
     });
     return res;
@@ -100,14 +97,13 @@ export const createMessage = async (
     console.log(e);
   }
 };
-
 export const getMessagesByConversationId = async (
   token: string,
   id: number,
   setMassage: Function
 ) => {
   try {
-    const res = await axios.get(`${BaseUrl}/messages/${id}`, {
+    const res = await axios.get(`${BASE_URL}/messages/${id}`, {
       headers: { authorization: token },
     });
     setMassage(res.data.messages);

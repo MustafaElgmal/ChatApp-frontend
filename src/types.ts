@@ -33,27 +33,8 @@ export interface createUserType {
 export interface UserType extends createUserType{
   id:number,
   messages?:MessageType[]
-  conversations?:ConversationType[]
-}
-
-export interface UserTypes extends createUserType {
-  id: number;
-  dateOfBirth: Date | null;
-}
-
-export interface authActionType {
-  type: string;
-  payload: {
-    token: string;
-  };
-}
-
-export interface authStateType {
-  auth: {
-    user: UserTypes;
-    isLoggedIn: Boolean;
-    token: string;
-  };
+  conversations?:ConversationType[],
+  dateOfBirth?:Date
 }
 
 export interface ConversationType{
@@ -67,9 +48,4 @@ export interface ConversationType{
   name:string
 }
 
-export interface ConversationActionType{
-  type:string,
-  payload:{
-    conversations:ConversationType[]
-  }
-}
+

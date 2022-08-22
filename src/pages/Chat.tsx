@@ -4,16 +4,16 @@ import Header from "../components/Header";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Message from "../components/Message";
-import { AppProps, authStateType, MessageType } from "../types";
+import { AppProps,MessageType } from "../types";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { createMessage, getMessagesByConversationId } from "../utiles/apis";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { useAppSelector } from "../utiles/hookes";
 
 const Chat = ({ socket }: AppProps) => {
   const { id } = useParams();
   const [messages, setMessages] = useState<MessageType[]>([]);
-  const token = useSelector((state: authStateType) => state.auth.token);
+  const token=useAppSelector((state)=>state.auth.token)
   const formik = useFormik({
     initialValues: {
       body: "",

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import ChatBubbles from "../components/ChatBubbles";
 import Header from "../components/Header";
-import { AppProps, authStateType, ConversationType } from "../types";
+import { AppProps, ConversationType } from "../types";
 import { getConversations } from "../utiles/apis";
+import { useAppSelector } from "../utiles/hookes";
 
 const GroupChat = ({ socket }: AppProps) => {
-  const dispatch = useDispatch();
-  const token = useSelector((state: authStateType) => state.auth.token);
+  const token = useAppSelector((state) => state.auth.token);
   const [conversations, setConversation] = useState<ConversationType[]>([]);
   const [conversationsFilter, setConversationFilter] = useState<ConversationType[]>([]);
 

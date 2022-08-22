@@ -13,8 +13,8 @@ const ChatBubbles = ({ conversation, socket }: AppProps) => {
   };
 
   useEffect(() => {
-    socket?.emit("join_conversation", conversation?.id.toString());
-  }, [socket]);
+    
+  }, []);
 
   return (
     <Card

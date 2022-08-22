@@ -1,12 +1,14 @@
-import { useFormik } from "formik";
-import { useEffect, useRef, useState } from "react";
+
+import { useFormik, validateYupSchema } from "formik";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import { AppProps, authStateType, UserType, UserTypes } from "../types";
+import { AppProps, UserType } from "../types";
 import * as Yup from "yup";
 import { CreateConversation, getUsers } from "../utiles/apis";
-import { useSelector } from "react-redux";
 import UserBubbles from "./UserBubbles";
+import { useAppSelector } from "../utiles/hookes";
 import SelectedUsers from "./SelectedUsers";
+
 
 const NewConversation = ({ show, onHide }: AppProps) => {
   const [users, setUsers] = useState<UserType[]>([]);
@@ -14,7 +16,7 @@ const NewConversation = ({ show, onHide }: AppProps) => {
     new Set()
   );
   const [userIds, setUserIds] = useState<Set<number>>(new Set(new Set()));
-  const token = useSelector((state: authStateType) => state.auth.token);
+  const token=useAppSelector((state)=>state.auth.token)
   const formik = useFormik({
     initialValues: {
       title: "",

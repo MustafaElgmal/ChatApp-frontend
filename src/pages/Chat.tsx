@@ -8,7 +8,7 @@ import { AppProps,MessageType } from "../types";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { createMessage, getMessagesByConversationId } from "../utiles/apis";
 import { useParams } from "react-router";
-import { useAppSelector } from "../utiles/hookes";
+import { useAppSelector } from "../redux/app/hookes";
 
 const Chat = ({ socket }: AppProps) => {
   const { id } = useParams();
@@ -33,6 +33,7 @@ const Chat = ({ socket }: AppProps) => {
     await getMessagesByConversationId(token, parseInt(id!), setMessages);
   };
   useEffect(() => {
+    socket?.emit('join_conversation',id)
     socket?.on("recieve_message", (message) => {
       if (message.socketId === socket.id) {
         setMessages((prevMessages) => [

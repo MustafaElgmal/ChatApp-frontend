@@ -8,7 +8,7 @@ import Login from "./pages/SignIn";
 import Protected from "./components/Protected";
 import io from "socket.io-client";
 import { Socket } from "socket.io-client";
-import { useAppSelector } from "./utiles/hookes";
+import { useAppSelector } from "./redux/app/hookes";
 import { BASE_URL } from "./constants.ts";
 function App() {
   const [socket,setSocket]=useState<Socket>()

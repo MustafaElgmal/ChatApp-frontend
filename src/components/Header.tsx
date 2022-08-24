@@ -5,7 +5,7 @@ import { handelLogout } from "../redux/features/authSlice";
 import img from "../assets/icons8-arrow-pointing-left-24.png";
 import { useNavigate } from "react-router";
 import NewConversation from "./NewConversation";
-import { useAppSelector } from "../utiles/hookes";
+import { useAppSelector } from "../redux/app/hookes";
 
 
 const Header = ({ name }: { name: string }) => {

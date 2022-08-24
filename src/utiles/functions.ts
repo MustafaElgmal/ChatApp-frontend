@@ -1,12 +1,10 @@
+
 import { MessageType } from "./../types";
 import moment from "moment";
 
-export const display = () => {
-  console.log("This is file of All function!");
-};
 
 export const captilize = (name: string) => {
-  let nameCap = name
+  const nameCap = name
     .split(" ")
     .map((ele) => ele[0].toLocaleUpperCase() + ele.slice(1))
     .join(" ");
@@ -17,7 +15,10 @@ export const getTime = (date: Date) => {
   return moment(date).format("LT");
 };
 
-export const getLastMessage = (messages: MessageType[]) => {
+export const getLastMessage = (messages: MessageType[]=[]) => {
+  if(messages.length===0){
+    return `"Hey there!"`
+  }
   const now = new Date(Date.now()).getTime();
   let then,
     diff = Number.MAX_VALUE,
@@ -29,5 +30,5 @@ export const getLastMessage = (messages: MessageType[]) => {
       lastMessage = message;
     }
   });
-  return lastMessage;
+  return lastMessage.body;
 };

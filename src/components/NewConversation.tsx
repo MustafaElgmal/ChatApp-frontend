@@ -8,7 +8,6 @@ import UserBubbles from "./UserBubbles";
 import { useAppSelector } from "../redux/app/hookes";
 import SelectedUsers from "./SelectedUsers";
 import { useDispatch } from "react-redux";
-
 const NewConversation = ({ show, onHide }: AppProps) => {
   const [users, setUsers] = useState<UserType[]>([]);
   const dispatch=useDispatch()

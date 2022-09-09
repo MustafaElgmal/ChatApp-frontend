@@ -1,12 +1,12 @@
-import { MessageType } from "./../types";
-import moment from "moment";
+import { Dispatch } from '@reduxjs/toolkit';
 
-export const display = () => {
-  console.log("This is file of All function!");
-};
+import { ConversationType, MessageType } from "./../types";
+import moment from "moment";
+import { setConversationsFilter } from '../redux/features/conversationSlice';
+
 
 export const captilize = (name: string) => {
-  let nameCap = name
+  const nameCap = name
     .split(" ")
     .map((ele) => ele[0].toLocaleUpperCase() + ele.slice(1))
     .join(" ");
@@ -17,7 +17,10 @@ export const getTime = (date: Date) => {
   return moment(date).format("LT");
 };
 
-export const getLastMessage = (messages: MessageType[]) => {
+export const getLastMessage = (messages: MessageType[]=[]) => {
+  if(messages.length===0){
+    return `"Hey there!"`
+  }
   const now = new Date(Date.now()).getTime();
   let then,
     diff = Number.MAX_VALUE,
@@ -29,5 +32,12 @@ export const getLastMessage = (messages: MessageType[]) => {
       lastMessage = message;
     }
   });
-  return lastMessage;
+  return lastMessage.body;
+};
+
+export  const searchFilter = (value: string,conversations:ConversationType[],dispatch:Dispatch) => {
+  const conversationsFilter = conversations.filter((conversation) =>
+    conversation.name.toLowerCase().includes(value.toLowerCase())
+  );
+  dispatch(setConversationsFilter(conversationsFilter));
 };

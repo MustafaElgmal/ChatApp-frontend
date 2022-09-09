@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Card, Image } from "react-bootstrap";
 import { useNavigate } from "react-router";
-import { AppProps, MessageType } from "../types";
+import { AppProps } from "../types";
 import { captilize, getLastMessage } from "../utiles/functions";
 
 const ChatBubbles = ({ conversation, socket }: AppProps) => {
-  const lastMessage: MessageType = getLastMessage(conversation?.messages!);
+  const lastMessageBody:string = getLastMessage(conversation?.messages!);
   const name = captilize(conversation?.name!);
   const navigate = useNavigate();
   const GoToChat = () => {
@@ -14,11 +14,11 @@ const ChatBubbles = ({ conversation, socket }: AppProps) => {
 
   useEffect(() => {
     
-  }, []);
+  }, [socket]);
 
   return (
     <Card
-      className="ms-5 mb-3 p-2"
+      className=" buble mb-3 p-2"
       style={{
         width: "17rem",
         backgroundColor: "#EEEEEE",
@@ -34,7 +34,7 @@ const ChatBubbles = ({ conversation, socket }: AppProps) => {
         />
         <div className="mt-2">
           <Card.Title className="text-dark">{name}</Card.Title>
-          <Card.Text className="text-dark">{lastMessage?.body}</Card.Text>
+          <Card.Text className="text-dark">{lastMessageBody}</Card.Text>
         </div>
       </div>
     </Card>

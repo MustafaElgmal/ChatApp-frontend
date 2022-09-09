@@ -1,36 +1,45 @@
-
-import { useFormik, validateYupSchema } from "formik";
+import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { AppProps, UserType } from "../types";
 import * as Yup from "yup";
 import { CreateConversation, getUsers } from "../utiles/apis";
 import UserBubbles from "./UserBubbles";
-import { useAppSelector } from "../utiles/hookes";
+import { useAppSelector } from "../redux/app/hookes";
 import SelectedUsers from "./SelectedUsers";
-
+import { useDispatch } from "react-redux";
 
 const NewConversation = ({ show, onHide }: AppProps) => {
   const [users, setUsers] = useState<UserType[]>([]);
+  const dispatch=useDispatch()
   const [usersGroupSelected, setUsersGroupSelected] = useState<Set<UserType>>(
     new Set()
   );
   const [userIds, setUserIds] = useState<Set<number>>(new Set(new Set()));
-  const token=useAppSelector((state)=>state.auth.token)
+  const token = useAppSelector((state) => state.auth.token);
+
+  const AddToGroup = (user: UserType) => {
+    setUserIds((prevIds)=>new Set([...prevIds,user.id]));
+    setUsersGroupSelected((prevUsers)=>new Set([...prevUsers,user]));
+  };
+
+  const getAllUsers = async () => {
+    await getUsers(setUsers, token);
+  };
   const formik = useFormik({
     initialValues: {
       title: "",
     },
     validationSchema: Yup.object({
-      title: Yup.string().required("Title of Conversation is required!"),
+      title: Yup.string().required("Conversation name is required!"),
     }),
     onSubmit: async (values) => {
-      console.log({ ...values, userIds });
       const IDs = Array.from(userIds);
       if (IDs.length > 0) {
         const res = await CreateConversation(
           { ...values, userIds: IDs },
-          token
+          token,
+          dispatch
         );
         if (res?.status === 201) {
           alert("Added conversation!");
@@ -39,26 +48,18 @@ const NewConversation = ({ show, onHide }: AppProps) => {
           formik.resetForm();
           onHide && onHide();
         }
+      } else {
+        alert("Please select User!");
       }
     },
   });
 
-  const AddToGroup = (user: UserType) => {
-    userIds.add(user.id);
-    setUserIds(userIds);
-    usersGroupSelected.add(user);
-    setUsersGroupSelected(usersGroupSelected);
-  };
-
-  const getAllUsers = async () => {
-    await getUsers(setUsers, token);
-  };
+  
   useEffect(() => {
     getAllUsers();
   }, []);
   return (
     <Modal
-      size="sm"
       show={show}
       onHide={() => {
         formik.resetForm();
@@ -75,13 +76,15 @@ const NewConversation = ({ show, onHide }: AppProps) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="d-flex gap-3 selectedUsers">
-          {Array.from(usersGroupSelected).map((user: UserType) => (
-            <SelectedUsers key={user.id} user={user} />
-          ))}
-        </div>
+        {Array.from(usersGroupSelected).length > 0 ? (
+          <div className="d-flex gap-3 selectedUsers">
+            {Array.from(usersGroupSelected).map((user: UserType) => (
+              <SelectedUsers key={user.id} user={user} />
+            ))}
+          </div>
+        ) : null}
         <Form>
-          <Form.Group className="mb-3" style={{ width: "14rem" }}>
+          <Form.Group className="my-3" style={{ width: "14rem" }}>
             <Form.Control
               name="title"
               value={formik.values.title}

@@ -1,14 +1,19 @@
 import React from 'react'
 import { Card,Image} from 'react-bootstrap'
+import { useNavigate } from 'react-router';
 import { AppProps } from '../types';
 import { captilize } from '../utiles/functions';
 
 const UserBubbles = ({user,AddToGroup}:AppProps) => {
     const name = captilize(`${user?.firstName} ${user?.lastName}`);
+    const navigate=useNavigate()
   return (
     <Card
     className="mb-3 p-2 cardG"
-    onClick={()=>AddToGroup && AddToGroup(user)}
+    onClick={()=>{
+      AddToGroup && AddToGroup(user)
+      // navigate('/')
+    }}
   >
     <div className="d-flex gap-3">
       <Image

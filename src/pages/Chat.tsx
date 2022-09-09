@@ -8,7 +8,7 @@ import { AppProps,MessageType } from "../types";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { createMessage, getMessagesByConversationId } from "../utiles/apis";
 import { useParams } from "react-router";
-import { useAppSelector } from "../utiles/hookes";
+import { useAppSelector } from "../redux/app/hookes";
 
 const Chat = ({ socket }: AppProps) => {
   const { id } = useParams();
@@ -33,6 +33,7 @@ const Chat = ({ socket }: AppProps) => {
     await getMessagesByConversationId(token, parseInt(id!), setMessages);
   };
   useEffect(() => {
+    socket?.emit('join_conversation',id)
     socket?.on("recieve_message", (message) => {
       if (message.socketId === socket.id) {
         setMessages((prevMessages) => [
@@ -54,7 +55,7 @@ const Chat = ({ socket }: AppProps) => {
       <Header name={"Chat"} />
       <div className="bgg pt-5">
         <ScrollToBottom className="mt-5 box">
-          <div className="ms-5 mt-3">
+          <div className="mt-3" style={{overflowX:'hidden'}}>
             {messages.map((message) => (
               <Row
                 key={message?.id}
@@ -66,7 +67,7 @@ const Chat = ({ socket }: AppProps) => {
               </Row>
             ))}
           </div>
-          <Row className="bttn">
+          <div className="bttn">
             <InputGroup>
               <textarea
                 id="form3Example1c"
@@ -85,7 +86,7 @@ const Chat = ({ socket }: AppProps) => {
                 Send
               </Button>
             </InputGroup>
-          </Row>
+          </div>
         </ScrollToBottom>
       </div>
     </section>

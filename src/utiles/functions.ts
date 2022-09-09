@@ -7,9 +7,9 @@ import { setConversationsFilter } from '../redux/features/conversationSlice';
 
 export const captilize = (name: string) => {
   const nameCap = name
-    .split(" ")
-    .map((ele) => ele[0].toLocaleUpperCase() + ele.slice(1))
-    .join(" ");
+    .split(' ')
+    .map((ele) =>ele!==''? ele[0].toLocaleUpperCase() + ele.slice(1):null)
+    .join(' ');
   return nameCap;
 };
 

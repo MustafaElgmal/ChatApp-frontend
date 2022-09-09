@@ -21,8 +21,6 @@ const GroupChat = ({ socket }: AppProps) => {
     await getConversations(token, dispatch);
   };
 
-
-
   setTimeout(() => {
     dispatch(handelLogout());
     localStorage.removeItem("user");

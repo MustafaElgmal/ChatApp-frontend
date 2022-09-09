@@ -1,18 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Image } from "react-bootstrap";
 import { useNavigate } from "react-router";
-import { AppProps } from "../types";
+import { AppProps, MessageType } from "../types";
 import { captilize, getLastMessage } from "../utiles/functions";
 
 const ChatBubbles = ({ conversation, socket }: AppProps) => {
-  const lastMessageBody:string = getLastMessage(conversation?.messages!);
-  const name = captilize(conversation?.name!);
+  const [name,setName]=useState<string>()
+  const lastMessageBody:string = getLastMessage(conversation?.messages as MessageType[]);
   const navigate = useNavigate();
   const GoToChat = () => {
     navigate(`/Chat/${conversation?.id}`);
   };
 
   useEffect(() => {
+    setName(captilize(conversation?.name!))
     
   }, [socket]);
 

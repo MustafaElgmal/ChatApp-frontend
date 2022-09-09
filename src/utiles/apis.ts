@@ -3,7 +3,7 @@ import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
 import { handelLogin } from "../redux/features/authSlice";
 import { BASE_URL } from "../constants.ts";
-import { addConversation, setConversations, setConversationsFilter } from "../redux/features/conversationSlice";
+import { addConversation, addConversationFilter, setConversations, setConversationsFilter } from "../redux/features/conversationSlice";
 
 export const createUser = async (user: createUserType, dispatch: Dispatch) => {
   try {
@@ -61,6 +61,7 @@ export const CreateConversation = async (
       headers: { authorization: token },
     });
     dispatch(addConversation(res.data.conversation))
+    dispatch(addConversationFilter(res.data.conversation))
     return res;
   } catch (e: any) {
     if (e.response.status !== 500) {

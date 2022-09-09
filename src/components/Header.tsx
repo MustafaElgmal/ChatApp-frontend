@@ -10,9 +10,7 @@ import { useAppSelector } from "../redux/app/hookes";
 
 const Header = ({ name }: { name: string }) => {
   const [show, setShow] = useState(false);
-  const isLoggedIn = useAppSelector(
-    (state) => state.auth.isLoggedIn
-  );
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const Logout = () => {
@@ -26,6 +24,7 @@ const Header = ({ name }: { name: string }) => {
   return (
     <Navbar style={{ color: "#F8F5F5", height: "60px" }}>
       <Container>
+        
         <Navbar.Brand className="h1 fw-bold fs-4" style={{ color: "#595959" }}>
           {name === "Chat" ? (
             // eslint-disable-next-line jsx-a11y/alt-text
@@ -37,16 +36,17 @@ const Header = ({ name }: { name: string }) => {
           ) : null}
           <Navbar.Text>{name}</Navbar.Text>
         </Navbar.Brand>
-        <Navbar.Collapse className="justify-content-end gap-3">
+        <Navbar.Collapse className="justify-content-end">
           {isLoggedIn ? (
             <>
+            
               <Dropdown>
                 <Dropdown.Toggle
                   variant="dark"
                   id="dropdown-basic"
                 ></Dropdown.Toggle>
 
-                <Dropdown.Menu>
+                <Dropdown.Menu className="menu">
                   <Dropdown.Item onClick={() => setShow(true)}>
                     New conversation
                   </Dropdown.Item>

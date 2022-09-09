@@ -28,9 +28,7 @@ const SignUp = () => {
       ImgUrl: Yup.string().url("Please Enter Url!"),
     }),
     onSubmit: async (values) => {
-      console.log(values);
       const res = await createUser(values, dispatch);
-
       if (res?.status === 201) {
         formik.resetForm();
         navigate("/");

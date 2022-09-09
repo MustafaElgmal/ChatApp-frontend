@@ -1,6 +1,8 @@
+import { Dispatch } from '@reduxjs/toolkit';
 
-import { MessageType } from "./../types";
+import { ConversationType, MessageType } from "./../types";
 import moment from "moment";
+import { setConversationsFilter } from '../redux/features/conversationSlice';
 
 
 export const captilize = (name: string) => {
@@ -31,4 +33,11 @@ export const getLastMessage = (messages: MessageType[]=[]) => {
     }
   });
   return lastMessage.body;
+};
+
+export  const searchFilter = (value: string,conversations:ConversationType[],dispatch:Dispatch) => {
+  const conversationsFilter = conversations.filter((conversation) =>
+    conversation.name.toLowerCase().includes(value.toLowerCase())
+  );
+  dispatch(setConversationsFilter(conversationsFilter));
 };

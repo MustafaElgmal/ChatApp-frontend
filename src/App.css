@@ -4,6 +4,7 @@
   background-size: cover;
   height: calc(100vh - 60px);
   overflow: hidden;
+
 }
 
 .bttn {
@@ -40,16 +41,22 @@
 
 .start {
   justify-content: flex-start !important;
+  margin-left: 5% !important;
+}
+
+.buble{
+  margin-left: 50px;
 }
 
 .end {
-  margin-right: 5% !important;
   justify-content: flex-end !important;
+  margin-right: 5% !important;
 }
 
 .mmg {
   left: 30% !important;
   top: 5% !important;
+  width: 50%;
 }
 
 .create {
@@ -90,6 +97,16 @@
   margin-left: 30%;
 }
 
+.sec{
+height: 50px;
+
+}
+.menu{
+  right: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%) !important;
+}
+
 /* Bootstrap 4 text input with search icon */
 .has-search .form-control {
   padding-left: 2rem;
@@ -125,9 +142,24 @@
 
   .start {
     margin-right: 5% !important;
+    margin-left: 1% !important;
   }
 
   .end {
-    justify-content: flex-start !important;
+    margin-left: 1% !important;
+    
   }
+  .buble{
+    margin-left: 0 !important;
+    margin: auto !important;
+  }
+}
+
+@media screen and (max-width:1070px) {
+  .menu{
+    right: 0 !important;
+    left: auto !important;
+    transform: translate(0) !important;
+  }
+  
 }

@@ -60,7 +60,6 @@ const NewConversation = ({ show, onHide }: AppProps) => {
   }, []);
   return (
     <Modal
-      size="sm"
       show={show}
       onHide={() => {
         formik.resetForm();

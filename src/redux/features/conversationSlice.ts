@@ -19,8 +19,11 @@ export const conversationSlice = createSlice({
     setConversationsFilter:(state,action:PayloadAction<ConversationType[]>)=>{
         state.conversationsFilter=action.payload
     },
+    addConversationFilter:(state,action:PayloadAction<ConversationType>)=>{
+      state.conversationsFilter=[...state.conversationsFilter,action.payload]
+  },
 
   }
 });
-export const {setConversations,addConversation,setConversationsFilter} = conversationSlice.actions;
+export const {setConversations,addConversation,setConversationsFilter,addConversationFilter} = conversationSlice.actions;
 export default conversationSlice.reducer;

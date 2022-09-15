@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:3500";
+export const BASE_URL = "https://chatappp1234.herokuapp.com";
 const local = localStorage.getItem("user");
 export const localStorageauth = (): {
   token: string;

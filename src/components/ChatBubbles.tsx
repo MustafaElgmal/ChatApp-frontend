@@ -14,7 +14,6 @@ const ChatBubbles = ({ conversation, socket }: AppProps) => {
 
   useEffect(() => {
     setName(captilize(conversation?.name!))
-    
   }, [socket]);
 
   return (

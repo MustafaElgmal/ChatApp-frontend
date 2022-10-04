@@ -10,6 +10,7 @@ import io from "socket.io-client";
 import { Socket } from "socket.io-client";
 import { useAppSelector } from "./redux/app/hookes";
 import { BASE_URL } from "./constants.ts";
+import ErrorPage from "./pages/404Page";
 function App() {
   const [socket,setSocket]=useState<Socket>()
   const isLoggedIn = useAppSelector(
@@ -45,6 +46,11 @@ function App() {
             </Protected>
           }
         />
+        <Route
+          path="*"
+          element={<ErrorPage/>}
+        />
+
       </Routes>
     </div>
   );

@@ -1,4 +1,4 @@
-export const BASE_URL = "https://chatappp1234.herokuapp.com";
+export const BASE_URL = "https://chatapp-backend-production.up.railway.app";
 const local = localStorage.getItem("user");
 export const localStorageauth = (): {
   token: string;

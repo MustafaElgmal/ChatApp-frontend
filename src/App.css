@@ -8,8 +8,8 @@
 }
 
 .bttn {
-  position: sticky;
-  bottom: 0;
+  position: absolute;
+  bottom: 5px;
 }
 
 .box {
@@ -122,6 +122,17 @@ height: 50px;
   text-align: center;
   pointer-events: none;
   color: #aaa;
+}
+.mo{
+  margin-left: 16px;
+  cursor: pointer;
+}
+.moo{
+  width: 100%;
+  padding: 3 0.5rem;
+}
+.moo:hover{
+  background-color:#e9ecef;
 }
 
 @media screen and (max-width:550px) {

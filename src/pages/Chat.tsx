@@ -53,7 +53,7 @@ const Chat = ({ socket }: AppProps) => {
   return (
     <section>
       <Header name={"Chat"} />
-      <div className="bgg pt-5">
+      <div className="bgg pt-5 position-relative">
         <ScrollToBottom className="mt-5 box">
           <div className="mt-3" style={{overflowX:'hidden'}}>
             {messages.map((message) => (
@@ -67,7 +67,7 @@ const Chat = ({ socket }: AppProps) => {
               </Row>
             ))}
           </div>
-          <div className="bttn">
+          <div className="bttn ">
             <InputGroup>
               <textarea
                 id="form3Example1c"

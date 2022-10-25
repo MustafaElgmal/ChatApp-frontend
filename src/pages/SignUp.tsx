@@ -15,8 +15,7 @@ const SignUp = () => {
       firstName: "",
       lastName: "",
       email: "",
-      password: "",
-      ImgUrl: "https://review2020.s3.amazonaws.com/1651037192205moo.jpg",
+      password: ""
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required("FirstName is required!"),
@@ -24,8 +23,7 @@ const SignUp = () => {
       email: Yup.string()
         .email("Email is not vaild!")
         .required("Email is required!"),
-      password: Yup.string().required("Password is required!"),
-      ImgUrl: Yup.string().url("Please Enter Url!"),
+      password: Yup.string().required("Password is required!")
     }),
     onSubmit: async (values) => {
       const res = await createUser(values, dispatch);
@@ -126,25 +124,7 @@ const SignUp = () => {
               </div>
             </div>
 
-            <div className="mb-4">
-              <div className="form-outline  mb-0">
-                <label style={{ color: "#686868" }}>ImgUrl</label>
-                <input
-                  type="ImgUrl"
-                  id="form3Example5c"
-                  className="form-control w-100"
-                  name="ImgUrl"
-                  value={formik.values.ImgUrl}
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                />
-                <p className="text-danger">
-                  {formik.errors.ImgUrl && formik.touched.ImgUrl
-                    ? formik.errors.ImgUrl
-                    : null}
-                </p>
-              </div>
-            </div>
+         
 
             <div className="d-flex justify-content-center mb-3 mb-lg-4">
               <Button

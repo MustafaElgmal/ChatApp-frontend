@@ -6,11 +6,12 @@ import img from "../assets/icons8-arrow-pointing-left-24.png";
 import { useNavigate } from "react-router";
 import NewConversation from "./NewConversation";
 import { useAppSelector } from "../redux/app/hookes";
-
+import { addPhoto } from "../utiles/apis";
 
 const Header = ({ name }: { name: string }) => {
   const [show, setShow] = useState(false);
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const token = useAppSelector((state) => state.auth.token);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const Logout = () => {
@@ -24,7 +25,6 @@ const Header = ({ name }: { name: string }) => {
   return (
     <Navbar style={{ color: "#F8F5F5", height: "60px" }}>
       <Container>
-        
         <Navbar.Brand className="h1 fw-bold fs-4" style={{ color: "#595959" }}>
           {name === "Chat" ? (
             // eslint-disable-next-line jsx-a11y/alt-text
@@ -39,7 +39,6 @@ const Header = ({ name }: { name: string }) => {
         <Navbar.Collapse className="justify-content-end">
           {isLoggedIn ? (
             <>
-            
               <Dropdown>
                 <Dropdown.Toggle
                   variant="dark"
@@ -50,6 +49,31 @@ const Header = ({ name }: { name: string }) => {
                   <Dropdown.Item onClick={() => setShow(true)}>
                     New conversation
                   </Dropdown.Item>
+
+                  <div>
+                    <label
+                      htmlFor="pic"
+                      className="moo"
+                      
+                    >
+                      <span className="mo">
+                        Upload Photo
+                      </span>
+
+                      <input
+                        hidden
+                        id="pic"
+                        type="file"
+                        accept=".jpg,.png"
+                        onChange={async (e) => {
+                          if (e.target.files !== null) {
+                            await addPhoto(token, e.target.files[0]);
+                          }
+                        }}
+                      />
+                    </label>
+                  </div>
+
                   <Dropdown.Item onClick={() => Logout()}>Logout</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>

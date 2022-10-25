@@ -28,10 +28,10 @@ export interface createUserType {
   lastName: string;
   email: string;
   password: string;
-  ImgUrl:string
 }
 export interface UserType extends createUserType{
   id:number,
+  ImgUrl?:string
   messages?:MessageType[]
   conversations?:ConversationType[],
   dateOfBirth?:Date

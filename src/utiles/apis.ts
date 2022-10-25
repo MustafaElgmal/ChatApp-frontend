@@ -116,3 +116,22 @@ export const getMessagesByConversationId = async (
     console.log(e);
   }
 };
+
+export const addPhoto = async (
+  token: string,
+  file: File,
+) => {
+  try {
+    const formData = new FormData();
+    formData.append("image", file);
+     await axios.post(`${BASE_URL}/users/image/me`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        authorization: token
+      },
+    });
+    
+  } catch (e) {
+    console.log(e);
+  }
+};

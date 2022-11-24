@@ -1,4 +1,4 @@
-export const BASE_URL = "https://chatapp-backend-production.up.railway.app";
+export const BASE_URL = "https://caht-app.onrender.com";
 const local = localStorage.getItem("user");
 export const localStorageauth = (): {
   token: string;
